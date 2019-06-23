@@ -1,0 +1,15 @@
+PHPUnit 7.5.11 by Sebastian Bergmann and contributors.
+
+..........R........                                               19 / 19 (100%)
+
+Time: 614 ms, Memory: 26.00 MB
+
+There was 1 risky test:
+
+1) Tests\Feature\CreateThreadsTest::publishThread
+This test did not perform any assertions
+
+/var/www/html/forum/tests/Feature/CreateThreadsTest.php:68
+
+OK, but incomplete, skipped, or risky tests!
+Tests: 19, Assertions: 22, Risky: 1.
