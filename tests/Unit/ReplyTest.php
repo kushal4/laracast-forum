@@ -38,4 +38,18 @@ class ReplyTest extends TestCase
         $reply->created_at=Carbon::now()->subMonth();
         $this->assertFalse($reply->wasJustPublished());
     }
+
+    /**
+     * @test
+     *
+     */
+    function it_can_detct_all_mentioned_usrs(){
+
+        $reply=make("App\Reply",
+            [
+                "body"=>"@JohnDoe tells to @JaneDoe"
+            ]);
+        $this->assertEquals(["JohnDoe","JaneDoe"],$reply->mentionedUsers());
+
+    }
 }

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatPostRequest;
 use App\Inspections\Spam;
+use App\Notifications\YouWereMentioned;
 use App\Reply;
+use App\User;
 
 use App\Rules\SpamFree;
 use App\Thread;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -53,51 +56,16 @@ class RepliesController extends Controller
     public function store($channelId, Thread $thread,CreatPostRequest $form)
     {
 
-        $form->persist($thread);
-       //dd(request()->all());
-      //  Log::alert("store controller");
-       /// try{
-        //dd("xvxxv");
+       // $reply=$form->persist($thread);
+        return $thread->addReply(
+            [
+                'body'=>\request('body'),
+                'user_id'=>auth()->id()
+            ])->load('owner');
 
-       /// }catch (Exception $e){
-           //dd("exception cauth");
-      //      throw new \Exception("test");
-       // }
 
-       //dd("dgsdg");
-//        $this->validate(\request(),
-//            ['body'=>'required']);
-//       $spam->detect(\request("body"));
-       // $reply=null;
+       // return $reply->load('owner');
 
-//        if(Gate::denies('create',new Reply)){
-//            return response("You cant reply too quickl",429);
-//        }
-
-            //dd("xdf");
-            //$this->authorize('create',new Reply);
-            //request()->validate(['body' => ['required',new SpamFree]]);
-            //dd(\request("body"));
-            //
-            // dd("dgdf");
-//       if (stripos(\request("body"), "yahoo") !== false) {
-////           dd("throw exception ends");
-//           throw new \Exception('');
-//           }
-////
-//
-//        }
-//            return $thread->addReply(
-//                [
-//                    'body'=>\request('body'),
-//                    'user_id'=>auth()->id()
-//                ])->load('owner');
-
-       // if(\request()->expectsJson()){
-           // return $reply->load('owner');
-       // }
-
-      //  return back();
     }
 
     /**

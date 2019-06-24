@@ -43,6 +43,13 @@ class Reply extends Model
         return $this->thread->path();
     }
 
+    public function mentionedUsers(){
+        preg_match_all("/\@([^\s.]+)/",$this->body,$matches);
+        $names=$matches[1];
+
+        return $names;
+    }
+
 
 
 

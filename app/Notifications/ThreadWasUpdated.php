@@ -54,7 +54,7 @@ class ThreadWasUpdated extends Notification
      */
     public function toArray()
     {
-        Log::alert("To array initiated");
+        //Log::alert("To array initiated");
         return [
             //'message' => $this->reply->owner->name . ' replied to ' . $this->thread->title,
             //'link' => $this->reply->path()

@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Events\ThreadHasNewReply;
+use App\Events\ThreadRecievedNewReply;
 use App\Filters\ThreadFilters;
 use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Model;
@@ -49,9 +50,9 @@ class Thread extends Model
 
     public function addReply($reply){
         $reply=  $this->replies()->create($reply);
-
+        event(new ThreadRecievedNewReply($reply));
         //event(new ThreadHasNewReply($this,$reply));
-$this->notifySubscribers($reply);
+//$this->notifySubscribers($reply);
 
 //       // Log::alert("Addreply hit here");
 //        $this->subscriptions
