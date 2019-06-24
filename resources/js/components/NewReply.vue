@@ -2,7 +2,7 @@
 <div>
         <div v-if="signedIn">
 
-                 <textarea name="body"
+                 <textarea name="body" id="descrip"
                            class="card w-full mb-4"
                            style="min-height: 200px"
                            placeholder="Anything special that you want to make a note of?"
@@ -20,7 +20,8 @@
 
 
 <script>
-
+     import 'jquery.caret';
+     import 'at.js';
      export default{
          props:["endpoint"],
          data(){
@@ -32,6 +33,21 @@
              signedIn(){
                      return window.App.signedIn;
              }
+         },
+         mounted(){
+             console.log("at new reply");
+             $('#descrip').atwho({
+                 at: "@",
+                 delay:750,
+                 callbacks:{
+                     remoteFilter: function(query, callback) {
+                         console.log("dfd");
+                         $.getJSON("/api/users", {name: query}, function(usernames) {
+                             callback(usernames);
+                         });
+                     }
+                 }
+             });
          },
          methods:{
              addReply(){

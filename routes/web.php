@@ -41,3 +41,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('api/users','Api\UsersController@index');
+

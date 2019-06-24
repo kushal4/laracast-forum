@@ -19,6 +19,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+
     <!-- Scripts -->
     <!-- Scripts -->
     <script>
@@ -41,6 +42,7 @@
         }
 
     </style>
+    @yield("header")
 </head>
 <body >
     <div id="app" >
