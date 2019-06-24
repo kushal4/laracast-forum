@@ -6,6 +6,7 @@ use App\Reply;
 use App\Thread;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class ReplyPolicy
 {
@@ -34,6 +35,21 @@ class ReplyPolicy
     }
 
     public function create(User $user){
-        return $user->lastReply->wasJustPublished();
+       // dd($user->lastReply);
+
+        if(! $lastrep=$user->fresh()->lastReply){
+           // Log::alert("print me!!!!!!!!");
+            return true;
+        }
+
+                //dd($lastrep->wasJustPublished());
+
+
+
+         //   return true;
+        //}else{
+            return ! $lastrep->wasJustPublished();
+       // }
+
     }
 }

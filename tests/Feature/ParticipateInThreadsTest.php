@@ -31,12 +31,12 @@ class ParticipateInThreadsTest extends TestCase
     /** @test */
     function a_reply_requires_a_body()
     {
-        $this->withoutExceptionHandling();
+        $this->withExceptionHandling();
         $this->signIn();
         $thread = create('App\Thread');
         $reply = make('App\Reply', ['body' => null]);
         //dd($reply);
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->json('post',$thread->path() . '/replies', $reply->toArray())
             ->assertStatus(422);
       //  dd(session()->all());
             // dd($response->assertSessionHasErrors('body'));
@@ -113,7 +113,7 @@ class ParticipateInThreadsTest extends TestCase
         //
          //try {
            //  new Foo();
-             $this->post($thread->path() . '/replies', $reply->toArray())
+             $this->json('post',$thread->path() . '/replies', $reply->toArray())
              ->assertStatus(422);
             // dd("SDGsdg0");
         // } catch (\Exception $e) {
@@ -146,9 +146,9 @@ class ParticipateInThreadsTest extends TestCase
          $thread = create('App\Thread');
          $reply = make('App\Reply');
          $this->post($thread->path() . '/replies', $reply->toArray())
-             ->assertStatus(201);
-      // $this->post($thread->path() . '/replies', $reply->toArray())
-        //    ->assertStatus(429);
+             ->assertStatus(200);
+      $this->post($thread->path() . '/replies', $reply->toArray())
+           ->assertStatus(429);
      }
 }
 

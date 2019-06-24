@@ -4,7 +4,7 @@
 namespace App\Exceptions;
 
 
-class ThrottleException
+class ThrottleException extends \Exception
 {
 
 }

@@ -6744,7 +6744,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nh3[data-v-1d11828b] {\n  margin: 40px 0 0;\n}\nul[data-v-1d11828b] {\n  list-style-type: none;\n  padding: 0;\n}\nli[data-v-1d11828b] {\n  display: inline-block;\n  margin: 0 10px;\n}\na[data-v-1d11828b] {\n  color: #42b983;\n}\n", ""]);
+exports.push([module.i, "\nh3[data-v-1d11828b] {\r\n  margin: 40px 0 0;\n}\nul[data-v-1d11828b] {\r\n  list-style-type: none;\r\n  padding: 0;\n}\nli[data-v-1d11828b] {\r\n  display: inline-block;\r\n  margin: 0 10px;\n}\na[data-v-1d11828b] {\r\n  color: #42b983;\n}\r\n", ""]);
 
 // exports
 

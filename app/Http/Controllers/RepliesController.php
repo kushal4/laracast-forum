@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatPostRequest;
 use App\Inspections\Spam;
 use App\Reply;
 
@@ -9,6 +10,7 @@ use App\Rules\SpamFree;
 use App\Thread;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 
 class RepliesController extends Controller
@@ -45,12 +47,13 @@ class RepliesController extends Controller
      *
      * @param $channelId
      * @param Thread $thread
-     * @param Spam $spam
+     * @param CreatFormPost $form
      * @return \Illuminate\Http\Response
-     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store($channelId, Thread $thread)
+    public function store($channelId, Thread $thread,CreatPostRequest $form)
     {
+
+        $form->persist($thread);
        //dd(request()->all());
       //  Log::alert("store controller");
        /// try{
@@ -65,12 +68,15 @@ class RepliesController extends Controller
 //        $this->validate(\request(),
 //            ['body'=>'required']);
 //       $spam->detect(\request("body"));
-        $reply=null;
+       // $reply=null;
 
-        try{
+//        if(Gate::denies('create',new Reply)){
+//            return response("You cant reply too quickl",429);
+//        }
+
             //dd("xdf");
-            //$this->authorize("create",new Reply);
-            request()->validate(['body' => ['required',new SpamFree]]);
+            //$this->authorize('create',new Reply);
+            //request()->validate(['body' => ['required',new SpamFree]]);
             //dd(\request("body"));
             //
             // dd("dgdf");
@@ -81,17 +87,14 @@ class RepliesController extends Controller
 ////
 //
 //        }
-            $reply=$thread->addReply(
-                [
-                    'body'=>\request('body'),
-                    'user_id'=>auth()->id()
-                ]);
-        }catch(\Exception $e){
-          return response("Sorry your reply cant be saved",422);
-        }
+//            return $thread->addReply(
+//                [
+//                    'body'=>\request('body'),
+//                    'user_id'=>auth()->id()
+//                ])->load('owner');
 
        // if(\request()->expectsJson()){
-            return $reply->load('owner');
+           // return $reply->load('owner');
        // }
 
       //  return back();
